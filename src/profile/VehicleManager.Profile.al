@@ -1,4 +1,4 @@
-profile MyProfile
+profile "Vehicle Manager"
 {
     Caption = 'Vehicle Manager';
     RoleCenter = "Vehicle Manager";

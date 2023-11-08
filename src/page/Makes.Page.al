@@ -27,6 +27,8 @@ page 50103 Makes
             {
                 RunObject = page "Make Models";
                 RunPageLink = Make = field(Code);
+                ToolTip = 'Executes the Models action.';
+                Image = ShowList;
             }
 
         }

@@ -6,7 +6,7 @@ table 50101 Vehicle
 
     fields
     {
-        field(1; "No."; Code[50])
+        field(1; "No."; Code[20])
         {
             Caption = 'No.';
             trigger OnValidate()
@@ -61,8 +61,6 @@ table 50101 Vehicle
         }
     }
     trigger OnInsert()
-    var
-        myInt: Integer;
     begin
         if "No." = '' then begin
             VehicleManagementSetup.Get();
@@ -91,7 +89,6 @@ table 50101 Vehicle
     procedure AssistEdit(OldVehicle: Record Vehicle): Boolean
     var
         Vehicle: Record Vehicle;
-        v: Page 8907;
     begin
         Vehicle := Rec;
         VehicleManagementSetup.Get();

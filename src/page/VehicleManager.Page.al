@@ -17,6 +17,11 @@ page 50105 "Vehicle Manager"
                 RunObject = page "Vehicle List";
                 Caption = 'Vehicle List';
             }
+            action("Vehicle Journal")
+            {
+                ApplicationArea = All;
+                RunObject = page "Vehicle Journal";
+            }
         }
 
         area(Sections)
@@ -41,6 +46,14 @@ page 50105 "Vehicle Manager"
                     ApplicationArea = All;
                     RunObject = page "Vehicle Management Setup";
                     Caption = 'Vehicle Management Setup';
+                }
+            }
+            group(History)
+            {
+                action("Vehicle Entries")
+                {
+                    ApplicationArea = All;
+                    RunObject = page "Vehicle Entries";
                 }
             }
 
