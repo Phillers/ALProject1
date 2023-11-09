@@ -53,7 +53,7 @@ codeunit 50101 "Vehicle Journal-Register"
     begin
         InitVehicleEntry(VehicleEntry);
         VehicleEntry.CopyFromJournal(VehicleJournalLine);
-        VehicleEntry.Insert(true);
+        VehicleEntry.Insert();
     end;
 
     local procedure InitVehicleEntry(var VehicleEntry: Record "Vehicle Entry")
@@ -62,6 +62,7 @@ codeunit 50101 "Vehicle Journal-Register"
             NextEntryNo += 1
         else
             InitNextEntryNo();
+        VehicleEntry.Init();
         VehicleEntry."Entry No." := NextEntryNo;
     end;
 
@@ -74,17 +75,30 @@ codeunit 50101 "Vehicle Journal-Register"
         NextEntryNo := FindRecordManagement.GetLastEntryIntFieldValue(VehicleEntry, VehicleEntry.FieldNo("Entry No.")) + 1;
     end;
 
+    [ErrorBehavior(ErrorBehavior::Collect)]
     local procedure CheckJournalLines(var VehicleJournalLine: Record "Vehicle Journal Line")
     var
+        TempErrorMessage: Record "Error Message" temporary;
         VehicleJournalCheckLine: Codeunit "Vehicle Journal-Check Line";
         NothingRegErr: Label 'Nothing to register';
+        Errors: List of [ErrorInfo];
+        error: ErrorInfo;
     begin
         if VehicleJournalLine.FindSet() then
             repeat
-                VehicleJournalCheckLine.Run(VehicleJournalLine);
+                if not VehicleJournalCheckLine.Run(VehicleJournalLine) then
+                    TempErrorMessage.LogLastError();
             until VehicleJournalLine.Next() = 0
         else
             Error(NothingRegErr);
+        if HasCollectedErrors then
+            errors := GetCollectedErrors();
+        foreach error in errors do
+            if TempErrorMessage.LogMessage(error.RecordId, error.FieldNo, TempErrorMessage."Message Type"::Error, error.Message) = 0 then
+                TempErrorMessage.LogSimpleMessage(TempErrorMessage."Message Type"::Error, error.Message);
+
+        if TempErrorMessage.HasErrors(false) then
+            TempErrorMessage.ShowErrorMessages(true);
     end;
 
     local procedure RegisterJournalLines(var VehicleJournalLine: Record "Vehicle Journal Line")

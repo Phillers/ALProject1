@@ -2,6 +2,7 @@ table 50105 "Vehicle Journal Line"
 {
     Caption = 'Vehicle Journal Line';
     DataClassification = CustomerContent;
+    LookupPageId = "Vehicle Journal";
 
     fields
     {
@@ -43,6 +44,7 @@ table 50105 "Vehicle Journal Line"
             Clustered = true;
         }
     }
+
 
     procedure Register()
     begin

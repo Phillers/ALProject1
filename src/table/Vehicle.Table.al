@@ -52,6 +52,10 @@ table 50101 Vehicle
         {
             DataClassification = ToBeClassified;
         }
+        field(18; Name; Text[50])
+        {
+            DataClassification = CustomerContent;
+        }
     }
     keys
     {

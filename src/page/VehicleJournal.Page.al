@@ -65,21 +65,23 @@ page 50107 "Vehicle Journal"
                     CurrPage.Update(false);
                 end;
             }
-            action("Register(No dialog)")
-            {
-                ApplicationArea = All;
-                Promoted = true;
-                ToolTip = 'Executes the Register action.';
-                Caption = 'Register(No dialog)';
-                Image = Registered;
-                PromotedCategory = Process;
+            // action("Register(No dialog)")
+            // {
+            //     ApplicationArea = All;
+            //     Promoted = true;
+            //     ToolTip = 'Executes the Register action.';
+            //     Caption = 'Register(No dialog)';
+            //     Image = Registered;
+            //     PromotedCategory = Process;
 
-                trigger OnAction()
-                begin
-                    Rec.Register(true);
-                    CurrPage.Update(false);
-                end;
-            }
+            //     trigger OnAction()
+            //     begin
+            //         Rec.Register(true);
+            //         CurrPage.Update(false);
+            //     end;
+            // }
+
         }
     }
+
 }

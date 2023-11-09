@@ -15,5 +15,10 @@ table 50100 "Vehicle Management Setup"
             DataClassification = CustomerContent;
             TableRelation = "No. Series";
         }
+        field(12; "Transport Order Nos."; Code[20])
+        {
+            DataClassification = CustomerContent;
+            TableRelation = "No. Series";
+        }
     }
 }

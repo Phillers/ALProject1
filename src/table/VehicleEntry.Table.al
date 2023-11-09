@@ -52,5 +52,11 @@ table 50104 "Vehicle Entry"
         "Operation Type" := VehicleJournalLine."Operation Type";
         "Resource No." := VehicleJournalLine."Resource No.";
         Description := VehicleJournalLine.Description;
+        OnAfterCopyFromJournal(Rec, VehicleJournalLine);
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterCopyFromJournal(Rec: Record "Vehicle Entry"; var VehicleJournalLine: Record "Vehicle Journal Line")
+    begin
     end;
 }
